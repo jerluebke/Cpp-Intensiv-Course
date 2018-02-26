@@ -1,5 +1,4 @@
 #include <iostream>
-#include <cmath>
 #include "../util.h"
 
 using namespace std;
@@ -45,19 +44,24 @@ bool is_prim(unsigned int n)
 }
 
 
-void print_without_power(unsigned int i)
+void print_without_power(unsigned int i, bool start)
 {
+    if (!start)
+        cout << "* ";
     cout << i << " ";
 }
 
-void print_with_power(unsigned int i, unsigned int power)
+void print_with_power(unsigned int i, unsigned int power, bool start)
 {
+    if (!start)
+        cout << "* ";
     cout << i << "^" << power;
 }
 
 void print_prim_factors(unsigned int n, bool power)
 {
     bool start = true;
+    bool start2 = true;
     int cnt = 0;
     cout << n << " = ";
     for (unsigned int i = n; i >=2; i--)
@@ -67,20 +71,19 @@ void print_prim_factors(unsigned int n, bool power)
             cnt = 0;
         while (is_prim(i) && n%i == 0)
         {
-            if (!start)
-                cout << "* ";
-            if (start)
-                start = false;
             if (power)
                 cnt++;
             else
-                print_without_power(i);
+                print_without_power(i, start);
             n = n/i;
             prim = true;
-        } 
+            if (start)
+                start = false;
+        }
         if (prim && power)
         {
-            print_with_power(i, cnt);
+            print_with_power(i, cnt, start2);
+            start2 = false;
             prim = false;
         }
     }
