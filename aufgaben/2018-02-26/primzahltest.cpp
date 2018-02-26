@@ -7,6 +7,7 @@ using namespace std;
 int main(int argc, char** argv)
 {
     int m = check_input(argc, argv);
+    //in case of failure
     if (m == -1)
         return 1;
     unsigned n = m;
