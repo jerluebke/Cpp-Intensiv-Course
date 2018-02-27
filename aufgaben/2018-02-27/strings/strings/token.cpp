@@ -35,11 +35,9 @@ int main()
     cout << "words: " << words << endl;
 
     //getting length of each word
-    // int l[words];
     int* l = new int[words];
     int w = 0;
     int wlen = 0;
-    bool word = false;
     c = cstr;
     previous_pos_is_space = true;
     while (c != cstr + length)
@@ -51,21 +49,12 @@ int main()
                 l[w] = wlen;
                 w++;
             }
-            word = true;
             wlen = 0;
             previous_pos_is_space = false;
         }
-        if (*c == ' ')
-        {
+        else if (*c == ' ')
             previous_pos_is_space = true;
-            word = false;
-            c++;
-            continue;
-        }
-        // word and previous_pos_is_space might be redundand
-        // this construct here can be expressed using if-else
-        // and therewith be shortened
-        if (word)
+        if (!previous_pos_is_space)     // over_word == not previous_pos_is_space
             wlen++;
         c++;
     }
