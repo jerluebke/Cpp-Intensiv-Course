@@ -16,7 +16,9 @@ class robot
 		void moveRobot(int newPosX, int newPosY);
 		void moveRobot(float newPosX, float newPosY);
 		void moveRobot(float degree, unsigned int speed = 1000);
-		void moveRobot(const int speed);
+        // <1>
+        // removed `const` specifier of `int speed`
+		void moveRobot(int speed);
 		void turnRobot(const float degree);
 		bool locateTarget();
 
@@ -25,11 +27,20 @@ class robot
 		void setTarget(target* newTarget);
 		void printStatusCode() const;
 
+        // <2>
+        // moved these two methodes from `private` to `public`
+        // no special treatment needed, since they don't modify anything
+		void moveFinger1();
+		void moveFinger2();
+
+        // <3>
+        // added public methods to retreive position
+		const float getPosX() const;
+		const float getPosY() const;
+
 		robot operator+(robot & rob);
 
   private:
-		void moveFinger1();
-		void moveFinger2();
 		float m_posX;
 		float m_posY;
 		float m_headDirection;      // in Grad (relativ zur x-Achse des Koordinatensystems)

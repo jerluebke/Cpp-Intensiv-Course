@@ -43,6 +43,11 @@ void robot::moveRobot(float newPosX, float newPosY)
 	degree = (atan2(newPosY, newPosX) + pi) / (2*pi) * 360;
 	turnRobot(degree);
 	moveRobot(speed);
+    // <5>
+    // position wasn't initially changed by these methodes
+    // doing that here
+    m_posX = newPosX;
+    m_posY = newPosY;
 }
 
 void robot::moveRobot(float degree, unsigned int speed)
@@ -53,7 +58,9 @@ void robot::moveRobot(float degree, unsigned int speed)
 	std::cout << "Wenn sie doch aufgerufen wird, ist dies ein Fehler!";
 }
 
-void robot::moveRobot(const int speed)
+// <1>
+// removed `const` specifier of `int speed`
+void robot::moveRobot(int speed)
 {
 	if (speed > 100) speed = 100;
 	if (speed < 0) speed = 0;
@@ -73,11 +80,13 @@ void robot::turnRobot(const float degree)
 bool robot::locateTarget()
 {
 	if (!m_cameraCalibrated) return false;
-	float targetPosX = m_currentTarget->m_posX;
+    //changed `m_posX` to `getPosX()`
+	float targetPosX = m_currentTarget->getPosX();
 	float targetPosY;
 	float direction;
 	const float pi = 3.14f;
-	targetPosY = m_currentTarget->m_posY;
+    //changed `m_posY` to `getPosY()`
+	targetPosY = m_currentTarget->getPosY();
 	direction = (atan2(targetPosY, targetPosX) + pi) / (2*pi) * 360;
 	if ((direction - m_headDirection < 45) || (direction - m_headDirection > 45))
 		return false;
@@ -118,6 +127,24 @@ void robot::moveFinger2()
 	std::cout << "Bewege Finger2." << "\n";
 }
 
+// <3>
+// Implementation of public methodes for retreiving position
+const float robot::getPosX() const
+{
+	return m_posX;
+}
+
+const float robot::getPosY() const
+{
+	return m_posY;
+}
+
+
+// TODO:
+// What is this operator supposed to do?
+// In the case `robor c3po = hal + r2d2;` it adds the position of r2d2 to the
+// postion of hal and returns a pointer to hal
+// Is that the desiered behaviour?
 robot robot::operator+(robot & rob)
 {
 	this->m_posX += rob.m_posX;
@@ -129,14 +156,17 @@ void main()
 {
 	robot hal;
 	robot r2d2;
-	hal.m_posX = 15;
-	hal.m_posY = 10;
-	r2d2.m_posX = 5;
-	r2d2.m_posY = 10;
+    // <4>
+    // set position of robots using `moveRobot()`
+    hal.moveRobot(15, 10);
+    r2d2.moveRobot(5, 10);
 	robot c3po = hal + r2d2;
-	std::cout << "c3po:" << c3po.m_posX << "\n";
-	std::cout << "hal:" << hal.m_posX << "\n";
-    std::cout << "r2d2:" << r2d2.m_posX << "\n";	
+    // <3>
+    // replaced accessing private attributes with calling public method to
+    // retreive position
+	std::cout << "c3po:" << c3po.getPosX() << "\n";
+	std::cout << "hal:" << hal.getPosX() << "\n";
+    std::cout << "r2d2:" << r2d2.getPosX() << "\n";
 	hal.moveFinger1();
 	hal.calibrateCamera();
 	hal.moveRobot(10,10);
