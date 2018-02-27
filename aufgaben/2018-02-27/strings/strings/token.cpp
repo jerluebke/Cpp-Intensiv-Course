@@ -26,11 +26,9 @@ int main()
         if (previous_pos_is_space && *c != ' ')
         {
             words++;
-            c++;
             previous_pos_is_space = false;
-            continue;
         }
-        if (*c == ' ')
+        else if (*c == ' ')
             previous_pos_is_space = true;
         c++;
     }
@@ -64,6 +62,9 @@ int main()
             c++;
             continue;
         }
+        // word and previous_pos_is_space might be redundand
+        // this construct here can be expressed using if-else
+        // and therewith be shortened
         if (word)
             wlen++;
         c++;
@@ -71,51 +72,15 @@ int main()
     if (wlen != 0 && w < words)
         l[w] = wlen;
 
-
-    // const char* e = cstr;
-    // while (e != cstr + length-1)
-    // {
-    //     if (*e == ' ')
-    //     {
-    //         if (new_word)
-    //         {
-	//             if (v >= words)
-	//             {
-	//                 cerr << "v >= words !!" << endl;
-	//                 break;
-	//             }
-	//             l[v] = wlen;
-	//             wlen = 0;
-	//             v++;
-    //             new_word = false;
-    //         }
-    //         e++;
-    //         continue;
-    //     }
-    //     if (!new_word)
-    //         new_word = true;
-    //     wlen++;
-    //     e++;
-    // }
-	// if (wlen != 0)
-	// {
-	//     l[v] = wlen;
-	//     if (v >= words)
-	//         cerr << "v >= words" << endl;
-	// }
 	//print length of each word
     for (int i = 0; i < words; i++)
         cout << "Länge Wort " << i+1 << ": " << l[i] << endl;
-
-
-    // int l = 256;
 
     //extracting words
     //initializing array for words
 	char** word_arr = new char* [words];
     for (int w = 0; w < words; w++)
         word_arr[w] = new char [l[w]];
-        // word_arr[w] = new char [256];
     c = cstr;
     w = 0;
     previous_pos_is_space = true;
@@ -133,18 +98,13 @@ int main()
         c++;
     }
 
-    //     while (*d == ' ')
-    //         d++;
-    //     for (int i = 0; *d != ' '; i++, d++)
-    //         word_arr[w][i] = *d;
-    //     w++;
-    // }
-
     //printing result
     for (int w = 0; w < words; w++)
         cout << "Wort Nummer " << w+1 << ": " << word_arr[w] << endl;
 
 	delete[] l;
-	cerr << "l deleted" << endl;
+    //deleting the elemtens of word_arr
+    for (int w = 0; w < words; w++)
+        delete[] word_arr[w];
 	delete[] word_arr;
 }
