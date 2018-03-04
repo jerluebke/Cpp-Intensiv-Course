@@ -120,7 +120,7 @@ matrix matrix::invert() const
     double invData[2][2] = {{this->m_data[1][1], - this->m_data[0][1]},
                             {- this->m_data[1][0], this->m_data[0][0]}};
     matrix inverse(invData, this->m_name + "^-1");
-    return inverse;
+    return (inverse*(1./this->det()));
 }
 
 double matrix::det() const
@@ -155,7 +155,6 @@ matrix matrix::operator=(double data[2][2])
         for (int j = 0; j < 2; j++)
             this->setValue(i, j, data[i][j]);
     return *this;
-
 }
 
 void matrix::operator=(std::string name)
@@ -194,12 +193,21 @@ matrix matrix::operator-(matrix & mat) const
 
 matrix matrix::operator*(matrix & mat) const
 {
-    double result[2][2];
-    for (int i = 0; i < 2; i++)
-        for (int j = 0; j < 2; j++)
-            result[i][j] = this->m_data[i][j] * mat.getValue(i, j);
-    matrix resultMatrix = matrix(result, "Result*");
+    double a1 = this->m_data[0][0]*mat.getValue(0, 0)
+                + this->m_data[0][1]*mat.getValue(1, 0);
+
+    double a2 = this->m_data[0][0]*mat.getValue(0, 1)
+                + this->m_data[0][1]*mat.getValue(1, 1);
+
+    double b1 = this->m_data[1][0]*mat.getValue(0, 0)
+                + this->m_data[1][1]*mat.getValue(0, 1);
+
+    double b2 = this->m_data[1][0]*mat.getValue(0, 1)
+                + this->m_data[1][1]*mat.getValue(1, 1);
+
+    matrix resultMatrix(a1, a2, b1, b2);
     return resultMatrix;
+
 }
 
 matrix matrix::operator*(const double & lambda) const
