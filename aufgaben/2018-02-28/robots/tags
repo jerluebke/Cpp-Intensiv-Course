@@ -1,0 +1,43 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+ROBOT_H_	robot.h	2;"	d
+TARGET_H_	target.h	2;"	d
+addHand	robot.cpp	/^void robot::addHand()$/;"	f	class:robot
+calibrateCamera	robot.cpp	/^void robot::calibrateCamera()$/;"	f	class:robot
+getPosX	robot.cpp	/^const float robot::getPosX() const$/;"	f	class:robot
+getPosX	target.cpp	/^const float target::getPosX() const$/;"	f	class:target
+getPosY	robot.cpp	/^const float robot::getPosY() const$/;"	f	class:robot
+getPosY	target.cpp	/^const float target::getPosY() const$/;"	f	class:target
+locateTarget	robot.cpp	/^bool robot::locateTarget()$/;"	f	class:robot
+m_bodyDirection	robot.h	/^		float m_bodyDirection;      \/\/ in Grad (relativ zur x-Achse des Koordinatensystems)$/;"	m	class:robot
+m_cameraCalibrated	robot.h	/^		bool m_cameraCalibrated;$/;"	m	class:robot
+m_currentTarget	robot.h	/^		target* m_currentTarget;    \/\/ Informationen zum (einzigen) aktuellen Zielobjekt$/;"	m	class:robot
+m_handCount	robot.h	/^		unsigned int m_handCount;   \/\/ Anzahl der montierten Hände$/;"	m	class:robot
+m_headDirection	robot.h	/^		float m_headDirection;      \/\/ in Grad (relativ zur x-Achse des Koordinatensystems)$/;"	m	class:robot
+m_posX	robot.h	/^		float m_posX;$/;"	m	class:robot
+m_posX	target.h	/^		const float m_posX;$/;"	m	class:target
+m_posY	robot.h	/^		float m_posY;$/;"	m	class:robot
+m_posY	target.h	/^		const float m_posY;$/;"	m	class:target
+m_status	robot.h	/^		long int m_status;$/;"	m	class:robot
+main	robot.cpp	/^int main()$/;"	f
+moveFinger1	robot.cpp	/^void robot::moveFinger1()$/;"	f	class:robot
+moveFinger2	robot.cpp	/^void robot::moveFinger2()$/;"	f	class:robot
+moveHead	robot.cpp	/^void robot::moveHead(float degree)$/;"	f	class:robot
+moveRobot	robot.cpp	/^void robot::moveRobot(float degree, unsigned int speed)$/;"	f	class:robot
+moveRobot	robot.cpp	/^void robot::moveRobot(float newPosX, float newPosY)$/;"	f	class:robot
+moveRobot	robot.cpp	/^void robot::moveRobot(int newPosX, int newPosY)$/;"	f	class:robot
+moveRobot	robot.cpp	/^void robot::moveRobot(int speed)$/;"	f	class:robot
+openHand	robot.cpp	/^void robot::openHand()$/;"	f	class:robot
+operator +	robot.cpp	/^robot robot::operator+(robot & rob)$/;"	f	class:robot
+printStatusCode	robot.cpp	/^void robot::printStatusCode() const$/;"	f	class:robot
+robot	robot.cpp	/^robot::robot()$/;"	f	class:robot
+robot	robot.h	/^class robot$/;"	c
+setTarget	robot.cpp	/^void robot::setTarget(target* newTarget)$/;"	f	class:robot
+target	target.cpp	/^target::target(float posX, float posY) : m_posX(posX), m_posY(posY)$/;"	f	class:target
+target	target.h	/^class target$/;"	c
+turnRobot	robot.cpp	/^void robot::turnRobot(const float degree)$/;"	f	class:robot
+~target	target.cpp	/^target::~target()$/;"	f	class:target
